@@ -32,7 +32,7 @@ jobs:
             docker build . --file ./docker/dockerfile --tag abmptit/docker-lab-static-website:${{ github.ref_name }}
           fi
     - name: Push the Docker image
-    run: |
+      run: |
           if [ ${{ github.head_ref }}  != "" ]; then
              docker push abmptit/docker-lab-static-website:${{ github.head_ref }}
           else
