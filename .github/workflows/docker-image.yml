@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v3    
     - name: Branch name
       run: |
-          if [ ${{ github.head_ref }}  != "" ]; then
+          if [ "${{ github.head_ref }}"  != "" ]; then
             echo running on branch ${{ github.head_ref }}
           else
             echo running on branch ${{ github.ref_name }}
@@ -26,14 +26,14 @@ jobs:
       run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_LOGIN }} --password-stdin
     - name: build docker image
       run: |
-          if [ ${{ github.head_ref }}  != "" ]; then
+          if [ "${{ github.head_ref }}"  != "" ]; then
              docker build . --file ./docker/dockerfile --tag abmptit/docker-lab-static-website:${{ github.head_ref }}
           else
             docker build . --file ./docker/dockerfile --tag abmptit/docker-lab-static-website:${{ github.ref_name }}
           fi
     - name: Push the Docker image
       run: |
-          if [ ${{ github.head_ref }}  != "" ]; then
+          if [ "${{ github.head_ref }}"  != "" ]; then
              docker push abmptit/docker-lab-static-website:${{ github.head_ref }}
           else
             docker push abmptit/docker-lab-static-website:${{ github.ref_name }}
