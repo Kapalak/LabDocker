@@ -30,6 +30,7 @@ jobs:
              docker build . --file ./docker/dockerfile --tag abmptit/docker-lab-static-website:${{ github.head_ref }}
           else
             docker build . --file ./docker/dockerfile --tag abmptit/docker-lab-static-website:${{ github.ref_name }}
+            docker build . --file ./docker/dockerfile --tag abmptit/docker-lab-static-website:latest
           fi
     - name: Push the Docker image
       run: |
@@ -37,4 +38,5 @@ jobs:
              docker push abmptit/docker-lab-static-website:${{ github.head_ref }}
           else
             docker push abmptit/docker-lab-static-website:${{ github.ref_name }}
+            docker push abmptit/docker-lab-static-website:latest
           fi
